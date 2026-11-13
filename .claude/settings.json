@@ -1,4 +1,20 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(terraform version)",
+      "Bash(terraform fmt:*)",
+      "Bash(terraform init:*)",
+      "Bash(terraform validate:*)",
+      "Bash(terraform plan:*)",
+      "Bash(terraform providers:*)",
+      "Bash(terraform show:*)",
+      "Bash(terraform output:*)",
+      "Bash(terraform test:*)",
+      "mcp__terraform",
+      "mcp__strands",
+      "mcp__plugin_aws-agents_awsknowledge"
+    ]
+  },
   "extraKnownMarketplaces": {
     "agent-toolkit-for-aws": {
       "source": {
