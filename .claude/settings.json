@@ -1,0 +1,14 @@
+{
+  "extraKnownMarketplaces": {
+    "agent-toolkit-for-aws": {
+      "source": { "source": "github", "repo": "aws/agent-toolkit-for-aws" }
+    },
+    "hashicorp": {
+      "source": { "source": "github", "repo": "hashicorp/agent-skills" }
+    }
+  },
+  "enabledPlugins": {
+    "aws-agents@agent-toolkit-for-aws": true,
+    "terraform@hashicorp": true
+  }
+}

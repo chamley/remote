@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "terraform": {
+      "command": "terraform-mcp-server",
+      "args": ["stdio"]
+    },
+    "strands": {
+      "command": "uvx",
+      "args": ["strands-agents-mcp-server"]
+    }
+  }
+}
