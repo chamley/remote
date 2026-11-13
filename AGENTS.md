@@ -1,20 +1,24 @@
 # Project guide
 
-Stack: Amazon Bedrock AgentCore, Strands Agents, AWS, Terraform.
+Stack: Amazon Bedrock AgentCore, Strands Agents, AWS, Terraform, GitHub, Python.
 
-## Always use current docs, never memory
+## Look up docs before writing code
 
-AgentCore, Strands and the Terraform AWS provider change faster than training data.
-Before writing or changing code that touches them, look up the current docs with
-the tools below and follow them over what you remember.
+Don't rely on training data for these. Check the live source first and cite the page you used.
 
-| Topic | Where to look |
-|---|---|
-| AgentCore (Runtime, Gateway, Memory, Identity, Harness, ...) | `aws-core:amazon-bedrock` skill, then AWS MCP `search_documentation` (topic `general` / `reference_documentation`) |
-| Strands Agents SDK | AWS MCP `search_documentation` with topic `strands_docs` |
-| Other AWS services | the matching `aws-core:*` skill (IAM, containers, observability, ...), then AWS MCP `search_documentation` |
-| What's new / recently released | AWS MCP `search_documentation` with topic `current_awareness` |
-| Terraform resources & providers | `terraform` MCP: `get_latest_provider_version`, `search_providers` + `get_provider_details` for the exact resource docs; `search_modules` for modules |
+| Topic | Source | How |
+|---|---|---|
+| AgentCore, Bedrock, any AWS service | AWS Knowledge MCP (`awsknowledge`, from the `aws-agents` plugin) | `search_documentation` / `read_documentation`; `retrieve_skill` for AWS guidance skills such as `amazon-bedrock`, `aws-iam`, `aws-sdk-python-usage` |
+| AgentCore workflows | `aws-agents` plugin skills | `agents-get-started`, `agents-build`, `agents-connect`, `agents-deploy`, `agents-harden`, `agents-debug`, `agents-optimize` |
+| Strands Agents SDK | Strands MCP (`strands`) | `search_docs` then `fetch_doc` |
+| Terraform providers, modules, resource arguments | Terraform MCP (`terraform`) | `get_latest_provider_version`, then `get_provider_capabilities` / `get_provider_details`. No HCP token is set, so it's registry docs only |
+| Terraform style, tests, modules, imports | HashiCorp `terraform@hashicorp` plugin skills | `terraform-style-guide`, `terraform-test`, `refactor-module`, `terraform-search-import` |
+| GitHub (Actions, CLI, API) | docs.github.com | Fetch `https://docs.github.com/llms.txt` for the page index. Use `gh help <cmd>` for CLI flags |
+| Python | docs.python.org and the library's own docs | No official docs plugin. Check the installed package version before you use an API |
+
+If the `aws-core` plugin is also installed, its `aws-mcp` server offers the same
+AWS docs tools; prefer `awsknowledge` for docs. Use `aws-core`'s `run_script`
+only for real AWS API calls, and only once AWS access has been set up.
 
 ## Terraform
 
@@ -26,13 +30,15 @@ the tools below and follow them over what you remember.
   and `terraform plan` when AWS credentials are available.
 - Never commit state files, `.tfvars` with secrets, or `.terraform/`.
 
-## AWS access
+## Secrets
 
-- Use the AWS MCP (`run_script`) for AWS API calls, not the AWS CLI via Bash.
-- Never put secrets in code or Terraform variables committed to the repo; use
-  Secrets Manager / SSM and follow the `aws-core:aws-secrets-manager` skill.
+Never put secrets in code or in committed Terraform variables; use Secrets Manager
+or SSM Parameter Store.
 
-## Environment
+## Where this setup lives
 
-The cloud environment's setup script installs the latest stable `terraform` and
-`terraform-mcp-server` from releases.hashicorp.com at session start.
+- `.claude/settings.json`: plugin marketplaces and enabled plugins (`aws-agents`, `terraform@hashicorp`).
+- `.mcp.json`: `terraform` (native `terraform-mcp-server`) and `strands` (`uvx strands-agents-mcp-server`).
+- Cloud environment setup script: installs the latest stable `terraform` and
+  `terraform-mcp-server` at session start. The environment allows
+  `registry.terraform.io`, `releases.hashicorp.com` and `strandsagents.com`.
