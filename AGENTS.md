@@ -40,5 +40,6 @@ or SSM Parameter Store.
 - `.claude/settings.json`: plugin marketplaces and enabled plugins (`aws-agents`, `terraform@hashicorp`).
 - `.mcp.json`: `terraform` (native `terraform-mcp-server`) and `strands` (`uvx strands-agents-mcp-server`).
 - Cloud environment setup script: installs the latest stable `terraform` and
-  `terraform-mcp-server` at session start. The environment allows
+  `terraform-mcp-server`, and installs the `aws-agents` and `terraform@hashicorp`
+  plugins (user scope) at session start. The environment allows
   `registry.terraform.io`, `releases.hashicorp.com` and `strandsagents.com`.
