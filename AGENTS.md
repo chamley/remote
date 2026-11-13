@@ -37,9 +37,12 @@ or SSM Parameter Store.
 
 ## Where this setup lives
 
-- `.claude/settings.json`: plugin marketplaces and enabled plugins (`aws-agents`, `terraform@hashicorp`).
+- `.claude/settings.json`: plugin marketplaces and enabled plugins (`aws-agents`, `terraform@hashicorp`, `pstack@cursor-plugins`).
 - `.mcp.json`: `terraform` (native `terraform-mcp-server`) and `strands` (`uvx strands-agents-mcp-server`).
-- Cloud environment setup script: installs the latest stable `terraform` and
-  `terraform-mcp-server`, and installs the `aws-agents` and `terraform@hashicorp`
-  plugins (user scope) at session start. The environment allows
-  `registry.terraform.io`, `releases.hashicorp.com` and `strandsagents.com`.
+- Cloud environment (`remote-playground`) setup script, in three sections:
+  1. latest stable `terraform` and `terraform-mcp-server`;
+  2. `tla2tools.jar` 1.7.4 (checksum-pinned) for pstack's `statechart` skill,
+     found via the `TLA2TOOLS=/usr/local/lib/tla2tools.jar` environment variable;
+  3. the `aws-agents`, `terraform@hashicorp` and `pstack` plugins (user scope).
+- The environment allows `registry.terraform.io`, `releases.hashicorp.com` and
+  `strandsagents.com`.

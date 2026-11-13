@@ -1,14 +1,43 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(terraform version)",
+      "Bash(terraform fmt:*)",
+      "Bash(terraform init:*)",
+      "Bash(terraform validate:*)",
+      "Bash(terraform plan:*)",
+      "Bash(terraform providers:*)",
+      "Bash(terraform show:*)",
+      "Bash(terraform output:*)",
+      "Bash(terraform test:*)",
+      "mcp__terraform",
+      "mcp__strands",
+      "mcp__plugin_aws-agents_awsknowledge"
+    ]
+  },
   "extraKnownMarketplaces": {
     "agent-toolkit-for-aws": {
-      "source": { "source": "github", "repo": "aws/agent-toolkit-for-aws" }
+      "source": {
+        "source": "github",
+        "repo": "aws/agent-toolkit-for-aws"
+      }
     },
     "hashicorp": {
-      "source": { "source": "github", "repo": "hashicorp/agent-skills" }
+      "source": {
+        "source": "github",
+        "repo": "hashicorp/agent-skills"
+      }
+    },
+    "cursor-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "cursor/plugins"
+      }
     }
   },
   "enabledPlugins": {
     "aws-agents@agent-toolkit-for-aws": true,
-    "terraform@hashicorp": true
+    "terraform@hashicorp": true,
+    "pstack@cursor-plugins": true
   }
 }
